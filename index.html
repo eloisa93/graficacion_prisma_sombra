@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Graficacion - Estrella Giratoria</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Graficación</h1>
+    </header>
+    <nav>
+        <div>
+            <button onclick="drawPoint(100, 100)">punto</button>
+            <button onclick="drawLine(100, 100, 200, 200)">linea</button>
+            <button onclick="drawRectangle(100, 100, 200, 200)">rectangulo</button>
+            <button onclick="drawCircle(100, 100, 100, 'green')">circulo</button>
+            <button onclick="drawTriangle(100, 50, 200, 200, 50, 200, 'red', 'black', 2)">triangulo</button>
+            <button onclick="drawPolygon([{ x: 150, y: 50 }, { x: 250, y: 120 }, { x: 220, y: 220 }, { x: 80,  y: 220 }, { x: 50,  y: 120 }], 'lightgreen', 'green')">poligono</button>
+            <button onclick="drawText('Hola Canvas', 100, 100)">texto</button>
+            <button onclick="drawImage(100, 100, 200, 200)">imagen</button>
+            <button onclick="limpiarTodo()">limpiar</button>
+            <button onclick="dibujarPlanoCartesiano()">dibujar plano cartesiano</button>
+        </div>
+        <br>
+
+        <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px; ">
+            <label><strong>Cubo 3D (Algoritmo del Pintor):</strong></label>
+            <button onclick="drawCube()" style="background-color: #ffd700; color: black; font-weight: bold;">Dibujar Cubo</button>
+            <button onclick="rotateCube('X', 5)">Rotar X (+5°)</button>
+            <button onclick="rotateCube('Y', 5)">Rotar Y (+5°)</button>
+            <button onclick="rotateCube('Z', 5)">Rotar Z (+5°)</button>
+        </div>
+        <br>
+
+        <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+            <label><strong>Prisma Triangular (Giro Continuo 3D):</strong></label>
+            <button onclick="drawPrismEstatico()" style="background-color: #28a745; color: white; font-weight: bold;">Dibujar Estático</button>
+            <button onclick="girarPrismaZ(-1)" style="background-color: #e2f0d9;">Girar (z) Izq</button>
+            <button onclick="girarPrismaZ(1)"  style="background-color: #e2f0d9;">Girar (z) Der</button>
+            <button onclick="girarPrismaY(-1)" style="background-color: #fff2cc;">Girar (y) Izq</button>
+            <button onclick="girarPrismaY(1)"  style="background-color: #fff2cc;">Girar (y) Der</button>
+            <button onclick="girarPrismaX(-1)" style="background-color: #fce4d6;">Girar (x) Izq</button>
+            <button onclick="girarPrismaX(1)"  style="background-color: #fce4d6;">Girar (x) Der</button>
+            <button onclick="detenerGiroPrisma()" style="background-color: #ffd1d8;">Detener Giro</button>
+            <button onclick="drawPrismShadow()" style="background-color: #d7cd09; color: white; font-weight: bold;">Aplicar Sombra</button>
+        </div>
+        <br>
+        <div>
+
+            <label>Línea de punto A a B</label>
+            <input type="text" id="x1" placeholder="X1" style="width: 40px;">
+            <input type="text" id="y1" placeholder="Y1" style="width: 40px;">
+            <input type="text" id="x2" placeholder="X2" style="width: 40px;">
+            <input type="text" id="y2" placeholder="Y2" style="width: 40px;">
+            <button onclick="drawLineFromAtoB()">Dibujar</button>
+        </div>
+
+        <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;">
+            <label><strong>Estrella (Rotación Z):</strong></label>
+            <button onclick="drawStar()">Dibujar Estática</button>
+            <button onclick="girarZ(-1)" style="background-color: #d1e9ff;">Girar (z)Izquierda</button>
+            <button onclick="girarZ(1)" style="background-color: #d1e9ff;">Girar (z)Derecha</button>
+            <button onclick="girarY(-1)" style="background-color: #d1ffd1;">Girar (y)Izquierda</button>
+            <button onclick="girarY(1)" style="background-color: #d1ffd1;">Girar (y)Derecha</button>
+            <button onclick="girarX(-1)" style="background-color: #ffd1f4;">Girar (x)Izquierda</button>
+            <button onclick="girarX(1)" style="background-color: #ffd1f4;">Girar (x)Derecha</button>
+            <button onclick="detenerGiro3D()" style="background-color: #ffd1d8;">Detener Giro</button>
+        </div>
+
+        <div>
+            <label>Círculo Math</label>
+            <input type="text" id="x" placeholder="X" value="0" style="width: 40px;">
+            <input type="text" id="y" placeholder="Y" value="0" style="width: 40px;">
+            <input type="text" id="radius" placeholder="Radio" value="100" style="width: 40px;">
+            <button onclick="drawCircleWithMath()">Dibujar</button>
+        </div>
+        
+        <div>
+            <label>Divisiones:</label>
+            <input type="number" id="numDivisiones" value="12" style="width: 50px;">
+            <button onclick="dibujarRelojPersonalizado()">Dibujar Reloj</button>
+        </div>
+
+        <div>
+            <label>Reloj Funcional:</label>
+            <button onclick="iniciarRelojFuncional()">Iniciar</button>
+            <button onclick="detenerReloj()">Detener/Limpiar</button>
+        </div>
+
+        <div>
+            <label>Hora Inicial:</label>
+            <input type="number" id="inputHrs" value="12" style="width: 40px;">
+            <input type="number" id="inputMin" value="0" style="width: 40px;">
+            <input type="number" id="inputSeg" value="0" style="width: 40px;">
+            <button onclick="iniciarRelojManual()">Reloj Manual</button>
+        </div>
+    </nav>
+
+    <main>
+        <canvas id="myCanvas" width="500" height="500" style="border: 1px solid black; background: white;"></canvas>
+    </main>
+
+    <footer>
+        <p>Derechos reservados &copy; 2026 | Tecnológico de Tlajomulco</p>
+    </footer>
+</body>
+</html>
